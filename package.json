@@ -1,0 +1,25 @@
+{
+  "name": "tehran-bus",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AliKarami/tehranBus.git"
+  },
+  "keywords": [
+    "Tehran",
+    "Bus",
+    "Tehran",
+    "Bus"
+  ],
+  "author": "Ali Karami",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AliKarami/tehranBus/issues"
+  },
+  "homepage": "https://github.com/AliKarami/tehranBus#readme"
+}
