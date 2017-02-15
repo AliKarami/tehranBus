@@ -16,10 +16,13 @@
     "Tehran",
     "Bus"
   ],
-  "author": "Ali Karami",
+  "author": "Ali Karami <ali.karami.m@gmail.com> (http://ali-karami.ir/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/AliKarami/tehranBus/issues"
   },
-  "homepage": "https://github.com/AliKarami/tehranBus#readme"
+  "homepage": "https://github.com/AliKarami/tehranBus#readme",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
 }
