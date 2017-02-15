@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/AliKarami/tehranBus#readme",
   "dependencies": {
+    "request": "^2.79.0",
     "underscore": "^1.8.3"
   }
 }
