@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/AliKarami/tehranBus#readme",
   "dependencies": {
+    "jsdom": "^9.11.0",
     "request": "^2.79.0",
     "underscore": "^1.8.3",
     "xmlreader": "^0.2.3"

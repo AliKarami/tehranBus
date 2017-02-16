@@ -1,8 +1,9 @@
 let bsCodes = require('./data/busStopCodes.json');
 let bsNames = require('./data/busStopNames.json');
 let request = require('request');
-let convert = require('xml-js');
 let xmlReader = require('xmlreader');
+let _ = require('underscore');
+let jsdom = require('jsdom');
 
 let correctXML = (xmlString) => {
 	return xmlString.split('\\\"').join('\"').split('\\r').join('').split('\\n').join('').split('\\t').join('').slice(1,-1);
@@ -29,7 +30,7 @@ let _getStopInfoByCode = (code) => {
 					for (let i=0;i<numberOfStops;i++) {
 						stops.push({
 							routeCode: xmlResponse.ETARoot.Stops.Stop.at(i).attributes().RouteCode,
-							originalName: xmlResponse.ETARoot.Stops.Stop.at(i).attributes().OriginalName,
+							originationName: xmlResponse.ETARoot.Stops.Stop.at(i).attributes().OriginationName,
 							destinationName: xmlResponse.ETARoot.Stops.Stop.at(i).attributes().DestinationName,
 							order: xmlResponse.ETARoot.Stops.Stop.at(i).attributes().Order,
 							routeType: xmlResponse.ETARoot.Stops.Stop.at(i).attributes().RouteType,
@@ -69,15 +70,25 @@ let _getRemainingTimes = (codeOrName) => {
 };
 
 let _updateStops = () => {
-
+	return new Promise((resolve,reject)=>{
+		jsdom.env('http://services20.tehran.ir/زمانبندی-حرکت-اتوبوس-ها/جدول-زمان-بندی-حرکت-اتوبوس-زنده',
+			['http://code.jquery.com/jquery.js'],
+			(err,window)=>{
+				if (err) reject(err);
+				else {
+					// let $ = window.$;
+					// Where are you fucking last script text?!
+				}
+			});
+	});
 };
 
 let _getStopNames = () => {
-
+	return _.keys(bsCodes);
 };
 
 let _getStops = () => {
-
+	return bsNames;
 };
 //send get Request to: https://application2.irantracking.com/FrontEndETA/MOBIL/api/ETA/GetBusStopStaticTimeTable?currentStopId=1662&routeId=273&direction=82
 let _getStopTimeTable = (stopCode,route,direction) => {
@@ -105,6 +116,4 @@ module.exports = {
 	getStopLocation: _getStopLocation
 };
 
-_getRemainingTimes(1433).then((res)=>{
-	console.log(JSON.stringify(res))
-});
+_updateStops();
