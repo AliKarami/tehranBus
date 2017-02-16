@@ -92,15 +92,42 @@ let _getStops = () => {
 };
 //send get Request to: https://application2.irantracking.com/FrontEndETA/MOBIL/api/ETA/GetBusStopStaticTimeTable?currentStopId=1662&routeId=273&direction=82
 let _getStopTimeTable = (stopCode,route,direction) => {
-
-};
+	return new Promise((resolve,reject)=>{
+		request({
+			method: 'GET',
+			uri: 'https://application2.irantracking.com/FrontEndETA/MOBIL/api/ETA/GetBusStopStaticTimeTable?currentStopId='+stopCode+'&routeId='+route+'&direction=' + direction
+		},(err,response,body)=>{
+			if (err) reject(err);
+			else {
+				xmlReader.read(correctXML(body),(xmlError,xmlResponse)=>{
+					if (xmlError) reject(xmlError);
+					else {
+						let result = xmlResponse.BusStopStaticTimeTable.attributes().Result;
+						let requestDate = xmlResponse.BusStopStaticTimeTable.attributes().RequestDate;
+						let dayType = xmlResponse.BusStopStaticTimeTable.attributes().DayType;
+						let normal = xmlResponse.BusStopStaticTimeTable.Normal.text().split(';');
+						let halfHoliday = xmlResponse.BusStopStaticTimeTable.HalfHoliday.text().split(';');
+						let holiday = xmlResponse.BusStopStaticTimeTable.Holiday.text().split(';');
+					}
+				})
+			}
+		});
+	});
+}; //we don't know about direction
 
 let _getStopLocationByName = (name) => {
-
+	return _getStopInfoByCode(bsCodes[name]);
 };
 
 let _getStopLocationByCode = (code) => {
-
+	return _getStopInfoByCode(code).then((stopInfo)=>{
+		return {
+			name: stopInfo.currentStopName,
+			code: stopInfo.currentStopCode,
+			lng: stopInfo.currentStopLng,
+			lat: stopInfo.currentStopLat
+		}
+	})
 };
 
 let _getStopLocation = (codeOrName) => {
@@ -116,4 +143,4 @@ module.exports = {
 	getStopLocation: _getStopLocation
 };
 
-_updateStops();
+_getStopTimeTable(1662,273,82);
