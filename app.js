@@ -142,5 +142,3 @@ module.exports = {
 	getStopTimeTable: _getStopTimeTable,
 	getStopLocation: _getStopLocation
 };
-
-_getStopTimeTable(1662,273,82);

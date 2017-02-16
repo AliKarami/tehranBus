@@ -1,6 +1,6 @@
 {
   "name": "tehran-bus",
-  "version": "0.0.2",
+  "version": "0.0.8",
   "description": "",
   "main": "app.js",
   "scripts": {
