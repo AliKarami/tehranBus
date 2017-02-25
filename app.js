@@ -134,6 +134,10 @@ let _getStopLocation = (codeOrName) => {
 	return !!Number(codeOrName)?_getStopLocationByCode(Number(codeOrName)):_getStopLocationByName(codeOrName);
 };
 
+_getRemainingTimes(1577).then((res)=>{
+	console.log(res);
+})
+
 module.exports = {
 	getRemainingTimes: _getRemainingTimes,
 	updateStops: _updateStops,
