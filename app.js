@@ -134,7 +134,7 @@ let _getStopLocation = (codeOrName) => {
 	return !!Number(codeOrName)?_getStopLocationByCode(Number(codeOrName)):_getStopLocationByName(codeOrName);
 };
 
-_getRemainingTimes(1577).then((res)=>{
+_getRemainingTimes('فروزانفر').then((res)=>{
 	console.log(res);
 })
 
